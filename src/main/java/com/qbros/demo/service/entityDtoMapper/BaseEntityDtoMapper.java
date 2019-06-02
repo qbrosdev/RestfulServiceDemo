@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by QBros on Zero Hour ... Hooah!
@@ -26,11 +27,9 @@ public abstract class BaseEntityDtoMapper<E extends BaseEntity, D extends BaseDT
     public abstract E convertToEntity(D dto);
 
     public List<D> convertToDtoList(List<E> listEntities) {
-        List<D> dTOList = new ArrayList<>();
-        for (E entity: listEntities){
-            dTOList.add(convertToDto(entity));
-        }
-        return dTOList;
+        return listEntities.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     public Page<D> convertToDtoPage (Page<E> pageEntities, Pageable pageable){
@@ -39,10 +38,8 @@ public abstract class BaseEntityDtoMapper<E extends BaseEntity, D extends BaseDT
     }
 
     public List<E> convertToEntityList(List<D> dtos) {
-        List<E> entityList = new ArrayList<>();
-        for (D dto: dtos){
-            entityList.add(convertToEntity(dto));
-        }
-        return entityList;
+        return dtos.stream()
+                .map(this::convertToEntity)
+                .collect(Collectors.toList());
     }
 }

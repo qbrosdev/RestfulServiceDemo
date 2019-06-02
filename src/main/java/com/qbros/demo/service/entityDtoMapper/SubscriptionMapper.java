@@ -45,7 +45,6 @@ public class SubscriptionMapper extends BaseEntityDtoMapper<SubscriberEntity, Su
 
     }
 
-
     //we don't want to expose the actual IDs of our entities
     @Override
     public SubscriberDTO convertToDto(SubscriberEntity entity) {

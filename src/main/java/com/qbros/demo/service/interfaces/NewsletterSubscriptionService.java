@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by QBros on Zero Hour ... Hooah!
@@ -19,7 +21,6 @@ public abstract class NewsletterSubscriptionService implements BaseService<Subsc
 
     protected final static String SERVICE_ERR_ALREADY_EXIST = "user already exist";
     protected final static String SERVICE_ERR_NOT_EXIST = "user not exist";
-
 
     protected SubscriberRepository subscriberRepository;
 
@@ -30,9 +31,8 @@ public abstract class NewsletterSubscriptionService implements BaseService<Subsc
 
     @Override
     public List<SubscriberEntity> getAll() {
-        List<SubscriberEntity> subscriberEntityList = new ArrayList<>();
-        subscriberRepository.findAll().forEach(subscriberEntityList::add);
-        return subscriberEntityList;
+        return StreamSupport.stream(subscriberRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     @Override
