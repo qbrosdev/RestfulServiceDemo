@@ -1,18 +1,14 @@
 package com.qbros.demo.controller.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+
 
 /**
  * Created by QBros on Zero Hour ... Hooah!
  */
 
 //todo fix getters and setters for this class
-@Getter
-@Setter
-@Accessors
+@Data
 public class ServiceCallResultDTO extends BaseDTO {
 
     private String taskId = "NA";
@@ -36,16 +32,6 @@ public class ServiceCallResultDTO extends BaseDTO {
         return new ServiceCallResultDTO().setServiceCallResult(ServiceCallResult.PARTIAL_COMPLETE).setTaskId(taskId);
     }
 
-    private ServiceCallResultDTO setTaskId(int taskId) {
-        this.taskId = "" + taskId;
-        return this;
-    }
-
-    private ServiceCallResultDTO setResURI(String resURI) {
-        this.resURI = resURI;
-        return this;
-    }
-
     public ServiceCallResultDTO setServiceCallResult(ServiceCallResult serviceCallResult) {
         this.serviceCallResult = serviceCallResult;
         return this;
@@ -54,5 +40,16 @@ public class ServiceCallResultDTO extends BaseDTO {
     //todo add description field
     public enum ServiceCallResult {
         SUCCESS, FAIL, PARTIAL_COMPLETE, CREATED;
+
+    }
+
+    private ServiceCallResultDTO setTaskId(int taskId) {
+        this.taskId = "" + taskId;
+        return this;
+    }
+
+    private ServiceCallResultDTO setResURI(String resURI) {
+        this.resURI = resURI;
+        return this;
     }
 }

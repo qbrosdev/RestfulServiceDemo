@@ -1,5 +1,6 @@
 package com.qbros.demo.controller.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +10,7 @@ import java.util.Date;
 /**
  * Created by QBros on Zero Hour ... Hooah!
  */
-@Getter
-@Setter
+@Data
 public class SubscriberDTO extends BaseDTO {
 
     @NotNull (message = "not a valid user! valid users have ids :(")

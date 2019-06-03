@@ -14,6 +14,4 @@ public final class Validation {
     public final static String USER_INVALID_MSG = "No proper user id format";
     public final static String RESOURCE_INVALID_ID = "No proper resource id format (positive numbers)";
 
-
-
 }

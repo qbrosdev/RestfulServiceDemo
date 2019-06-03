@@ -61,9 +61,7 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private ExceptionResponse generateExceptionResponse(String userErrorMsg) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse();
-        exceptionResponse.setUserErrorMsg(userErrorMsg, Utils.getServerTime());
-        return exceptionResponse;
+        return ExceptionResponse.builder().serverTime(Utils.getServerTime()).userErrorMsg(userErrorMsg).build();
     }
 
 }

@@ -42,21 +42,16 @@ public abstract class NewsletterSubscriptionService implements BaseService<Subsc
 
     @Override
     public long createNew(SubscriberEntity entity) {
-        if (subscriberRepository.findByUserId(entity.getUserId()).isPresent()) {
-            throw new ServerEntityConflictException(SERVICE_ERR_ALREADY_EXIST);
-        }
+        subscriberRepository.findByUserId(entity.getUserId())
+                .orElseThrow(() -> new ServerEntityConflictException(SERVICE_ERR_ALREADY_EXIST));
         SubscriberEntity subscriberEntity = subscriberRepository.save(entity);
         return subscriberEntity.getId();
     }
 
     @Override
     public void deleteById(long id) {
-        if (subscriberRepository.findById(id).isPresent()) {
-            subscriberRepository.deleteById(id);
-        } else {
-            throw new ServerEntityNotFoundException(SERVICE_ERR_NOT_EXIST);
-        }
-
+        subscriberRepository.findById(id).orElseThrow(() -> new ServerEntityNotFoundException(SERVICE_ERR_NOT_EXIST));
+        subscriberRepository.deleteById(id);
     }
 
     @Override
